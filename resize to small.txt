@@ -1,0 +1,9 @@
+GUI r
+DELAY 1000
+STRING powershell.exe
+DELAY 100
+ENTER
+DELAY 100
+STRING $host.ui.rawui.windowsize = New-Object System.Management.Automation.Host.Size 1, 1
+DELAY 100
+ENTER

@@ -1,0 +1,7 @@
+DELAY 2000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+STRING tree c:\ > E:\c_tree.txt
+ENTER

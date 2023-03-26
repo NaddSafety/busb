@@ -1,0 +1,11 @@
+REM Example to copy any photo file from Desktop to CircuitPy folder
+DELAY 1000
+GUI r
+DELAY 100
+STRING powershell
+ENTER
+DELAY 2000
+STRING cp $env:USERPROFILE\Desktop\*.jpg E:\CIRCUITPY\
+DELAY 100
+ENTER
+ENTER

